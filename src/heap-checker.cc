@@ -1967,7 +1967,7 @@ void HeapLeakChecker_InternalInitStart() {
       // turns out we do not need checking in the end; can stop profiling
       HeapLeakChecker::TurnItselfOffLocked();
       return;
-    } else if (RunningOnValgrind()) {
+    } else if (GperftoolsRunningOnValgrind()) {
       // There is no point in trying -- we'll just fail.
       RAW_LOG(WARNING, "Can't run under Valgrind; will turn itself off");
       HeapLeakChecker::TurnItselfOffLocked();

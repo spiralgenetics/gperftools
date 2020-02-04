@@ -504,7 +504,7 @@ void AnnotateFlushState(const char *file, int line);
     - Make your tool intercept the function RunningOnValgrind() and
       change its return value.
  */
-int RunningOnValgrind(void);
+int GperftoolsRunningOnValgrind(void);
 
 /* ValgrindSlowdown returns:
     * 1.0, if (RunningOnValgrind() == 0)
@@ -517,7 +517,7 @@ int RunningOnValgrind(void);
      SleepForSeconds(5 * ValgrindSlowdown());
    }
  */
-double ValgrindSlowdown(void);
+double GPerftoolsValgrindSlowdown(void);
 
 #ifdef __cplusplus
 }

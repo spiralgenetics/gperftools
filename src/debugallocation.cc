@@ -1158,14 +1158,14 @@ REGISTER_MODULE_INITIALIZER(debugallocation, {
   // Either we or valgrind will control memory management.  We
   // register our extension if we're the winner. Otherwise let
   // Valgrind use its own malloc (so don't register our extension).
-  if (!RunningOnValgrind()) {
+  if (!GperftoolsRunningOnValgrind()) {
     DebugMallocImplementation *impl = new (debug_malloc_implementation_space.chars) DebugMallocImplementation();
     MallocExtension::Register(impl);
   }
 });
 
 REGISTER_MODULE_DESTRUCTOR(debugallocation, {
-  if (!RunningOnValgrind()) {
+  if (!GperftoolsRunningOnValgrind()) {
     // When the program exits, check all blocks still in the free
     // queue for corruption.
     DanglingWriteChecker();

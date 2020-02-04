@@ -77,7 +77,7 @@ const void *VDSOSupport::Init() {
     // on stack, and so glibc works as if VDSO was not present.
     // But going directly to kernel via /proc/self/auxv below bypasses
     // Valgrind zapping. So we check for Valgrind separately.
-    if (RunningOnValgrind()) {
+    if (GperftoolsRunningOnValgrind()) {
       vdso_base_ = NULL;
       return NULL;
     }

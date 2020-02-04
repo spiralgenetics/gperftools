@@ -1120,7 +1120,7 @@ TCMallocGuard::TCMallocGuard() {
 #ifdef TCMALLOC_USING_DEBUGALLOCATION
     // Let debugallocation register its extension.
 #else
-    if (RunningOnValgrind()) {
+    if (GperftoolsRunningOnValgrind()) {
       // Let Valgrind uses its own malloc (so don't register our extension).
     } else {
       MallocExtension::Register(new TCMallocImplementation);
@@ -1132,7 +1132,7 @@ TCMallocGuard::TCMallocGuard() {
 TCMallocGuard::~TCMallocGuard() {
   if (--tcmallocguard_refcount == 0) {
     const char* env = NULL;
-    if (!RunningOnValgrind()) {
+    if (!GperftoolsRunningOnValgrind()) {
       // Valgrind uses it's own malloc so we cannot do MALLOCSTATS
       env = getenv("MALLOCSTATS");
     }

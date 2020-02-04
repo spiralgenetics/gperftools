@@ -149,7 +149,7 @@ static int GetRunningOnValgrind(void) {
 }
 
 /* See the comments in dynamic_annotations.h */
-int RunningOnValgrind(void) {
+int GperftoolsRunningOnValgrind(void) {
   static volatile int running_on_valgrind = -1;
   int local_running_on_valgrind = running_on_valgrind;
   /* C doesn't have thread-safe initialization of statics, and we
@@ -163,12 +163,12 @@ int RunningOnValgrind(void) {
 #endif  /* DYNAMIC_ANNOTATIONS_EXTERNAL_IMPL == 0 */
 
 /* See the comments in dynamic_annotations.h */
-double ValgrindSlowdown(void) {
+double GPerftoolsValgrindSlowdown(void) {
   /* Same initialization hack as in RunningOnValgrind(). */
   static volatile double slowdown = 0.0;
   double local_slowdown = slowdown;
   ANNOTATE_BENIGN_RACE(&slowdown, "safe hack");
-  if (RunningOnValgrind() == 0) {
+  if (GperftoolsRunningOnValgrind() == 0) {
     return 1.0;
   }
   if (local_slowdown == 0.0) {
